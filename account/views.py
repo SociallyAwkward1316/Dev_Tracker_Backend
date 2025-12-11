@@ -13,67 +13,67 @@ from .serializers import UserRegisterSerializer, HomePageProjectListSerializer, 
 from .serializers import CreateCategorySerializer, CreateTaskSerializer
 from .models import Projects, Categories, Tasks
 
-# Create your views here.
+# Create your views here
 class CustomTokenObtainPairView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
-        try:
-            response = super().post(request, *args, **kwargs)
-            tokens =response.data
-
-            access_token = tokens['access']
-            refresh_token = tokens['refresh']
-
-            res = Response()
-
-            res.data = {"success":True}
-
-            res.set_cookie(
-                key="access_token",
-                value=access_token,
-                httponly=True,
-                secure=True,
-                samesite="None",
-                path="/",
-            )
-
-            res.set_cookie(
-                key="refresh_token",
-                value=refresh_token,
-                httponly=True,
-                secure=True,
-                samesite="None",
-                path="/",
-            )
-            return res
-
-        except:
-            return Response({"success":False})
+        response = super().post(request, *args, **kwargs)
+        if response.status_code != 200:
+            return Response({"success": False}, status=response.status_code)
         
+        tokens = response.data
+        access_token = tokens['access']
+        refresh_token = tokens['refresh']
+
+        # Set cookies directly on the same response object
+        response.set_cookie(
+            key="access_token",
+            value=access_token,
+            httponly=True,
+            secure=True,      # HTTPS required for cross-domain
+            samesite="None",  # must be None for cross-origin
+            path="/",
+        )
+        response.set_cookie(
+            key="refresh_token",
+            value=refresh_token,
+            httponly=True,
+            secure=True,
+            samesite="None",
+            path="/",
+        )
+
+        
+        response.data = {"success": True}
+        return response
+
 
 class CustomRefreshTokenView(TokenRefreshView):
     def post(self, request, *args, **kwargs):
-        try:
-            refresh_token = request.COOKIES.get('refresh_token')
-            request.data['refresh'] = refresh_token
+        refresh_token = request.COOKIES.get('refresh_token')
+        if not refresh_token:
+            return Response({"refreshed": False}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        # Inject cookie token into request.data
+        request.data['refresh'] = refresh_token
+        response = super().post(request, *args, **kwargs)
 
-            response = super().post(request, *args, **kwargs)
-            tokens = response.data
-            access_token = tokens['access']
-            res = Response()
-            res.data = {"refreshed":True}
+        if response.status_code != 200:
+            return Response({"refreshed": False}, status=response.status_code)
 
-            res.set_cookie(
-                key="access_token",
-                value=access_token,
-                httponly=True,
-                secure=True,
-                samesite="None",
-                path="/",
-            )
+        access_token = response.data['access']
+        response.set_cookie(
+            key="access_token",
+            value=access_token,
+            httponly=True,
+            secure=True,
+            samesite="None",
+            path="/",
+        )
 
-            return res
-        except:
-            return Response({"refreshed":False})
+        
+        response.data = {"refreshed": True}
+        return response
+
         
 
 @api_view(['POST'])
