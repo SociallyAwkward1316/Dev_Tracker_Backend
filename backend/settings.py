@@ -186,7 +186,7 @@ if render_hostname:
 
 
 SESSION_COOKIE_SAMESITE = "None"
-SESSION_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = True
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
