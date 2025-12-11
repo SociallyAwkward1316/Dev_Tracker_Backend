@@ -169,11 +169,13 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://devtracker-frontend-o615.onrender.com",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://devtracker-frontend-o615.onrender.com",
 ]
 
 render_hostname = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
