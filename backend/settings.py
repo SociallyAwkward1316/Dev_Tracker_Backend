@@ -42,7 +42,8 @@ DEBUG = os.environ.get("DEBUG", "True") == "True"
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'https://devtracker-frontend-o615.onrender.com"',
+    "devtracker-frontend-o615.onrender.com",
+    "dev-tracker-backend-qo24.onrender.com",
 ]
 
 
