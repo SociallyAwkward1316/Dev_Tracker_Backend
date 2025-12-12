@@ -167,16 +167,20 @@ REST_FRAMEWORK = {
   
 }
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 CORS_ALLOWED_ORIGINS = [
+    "https://devtracker-frontend-o615.onrender.com",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://devtracker-frontend-o615.onrender.com",
+
 ]
 
 CSRF_TRUSTED_ORIGINS = [
+    "https://devtracker-frontend-o615.onrender.com",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://devtracker-frontend-o615.onrender.com",
+
 ]
 
 
