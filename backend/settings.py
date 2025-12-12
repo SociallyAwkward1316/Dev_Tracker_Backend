@@ -178,12 +178,6 @@ CSRF_TRUSTED_ORIGINS = [
     "https://devtracker-frontend-o615.onrender.com",
 ]
 
-render_hostname = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
-
-if render_hostname:
-    CORS_ALLOWED_ORIGINS.append(f"https://{render_hostname}")
-    CSRF_TRUSTED_ORIGINS.append(f"https://{render_hostname}")
-
 
 CSRF_COOKIE_SAMESITE = "None"
 CSRF_COOKIE_SECURE = True
