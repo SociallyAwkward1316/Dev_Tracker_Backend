@@ -186,6 +186,9 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SAMESITE = "None"
 SESSION_COOKIE_SECURE = True
 
+SESSION_COOKIE_DOMAIN = "dev-tracker-backend-qo24.onrender.com"
+CSRF_COOKIE_DOMAIN = "dev-tracker-backend-qo24.onrender.com"
+
 
 CORS_ALLOW_HEADERS = [
     "content-type",
