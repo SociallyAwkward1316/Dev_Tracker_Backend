@@ -32,6 +32,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
             secure=True,      # HTTPS required for cross-domain
             samesite="None",  # must be None for cross-origin
             path="/",
+            domain="dev-tracker-backend-qo24.onrender.com",
         )
         response.set_cookie(
             key="refresh_token",
@@ -40,6 +41,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
             secure=True,
             samesite="None",
             path="/",
+            domain="dev-tracker-backend-qo24.onrender.com",
         )
 
         
