@@ -20,7 +20,7 @@ This project allows users to create projects, organize them into categories, and
 
 ---
 
-## Tech Stack
+##Tech Stack [(For Backend click to go to repository)](https://github.com/SociallyAwkward1316/DevTracker_FrontEnd/edit/main/README.md)
 
 - Python  
 - Django  
@@ -29,7 +29,7 @@ This project allows users to create projects, organize them into categories, and
 - PostgreSQL (production)  
 - SQLite (development)  
 - Gunicorn  
-- Render  
+- Render
 
 ---
 
